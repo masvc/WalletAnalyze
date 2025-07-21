@@ -1,69 +1,46 @@
-# React + TypeScript + Vite
+# WalletAnalyze
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 **30 分ライブコーディング** で作る Ethereum ウォレット分析ツール
 
-Currently, two official plugins are available:
+## 🎯 今回作るもの
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ウォレットアドレスを入力 → ETH 残高と取引履歴を表示する超シンプルな Web アプリ
 
-## Expanding the ESLint configuration
+## ⚡ 実装する機能
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **ETH 残高表示** (Wei → ETH 変換)
+- **最近の取引履歴** (送金・受金の一覧)
+- **ローディング & エラー表示**
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ 使用技術
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- React (create-react-app)
+- Etherscan API
+- Tailwind CSS (スタイリング)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 クイックスタート
+
+```bash
+# プロジェクト作成
+npx create-react-app wallet-analyze
+cd wallet-analyze
+
+# 環境変数設定
+echo "REACT_APP_ETHERSCAN_API_KEY=3ZPGJV98NW3GZHTD2G31R13U428IZTAJPY" > .env.local
+
+# 起動
+npm start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧪 テスト用アドレス
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Vitalik のウォレット**: `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`
+- **ENS Treasury**: `0xFe89cc7aBB2C4183683ab71653C4cdc9B02D44b7`
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📡 API エンドポイント
+
+```javascript
+// 残高取得
+`https://api.etherscan.io/api?module=account&action=balance&address=${address}&apikey=${apiKey}` // 取引履歴
+`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&page=1&offset=10&apikey=${apiKey}`;
 ```
